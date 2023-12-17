@@ -4,3 +4,8 @@ export interface ChatApi {
   datetime: string;
   message: string;
 }
+
+export interface ChatForm {
+  author: string;
+  message: string;
+}
