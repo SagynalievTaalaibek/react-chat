@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { ChatForm } from '../../types';
 
 interface Props {
@@ -31,37 +32,33 @@ const FormChat: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <>
-      <form onSubmit={onSubmitForm}>
+      <Form onSubmit={onSubmitForm}>
         <h3>Sent chat</h3>
-        <div className='mb-3'>
-          <label htmlFor='author' className='form-label'>
-            Author
-          </label>
-          <input
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='author'>Author</Form.Label>
+          <Form.Control
             type='text'
             name='author'
             id='author'
-            className='form-control'
             required
             value={chat.author}
             onChange={onChange}
           />
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='message' className='form-label'>
-            Message
-          </label>
-          <textarea
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='message'>Message</Form.Label>
+          <Form.Control
+            as='textarea'
+            rows={3}
             name='message'
             id='message'
-            className='form-control'
             required
             value={chat.message}
             onChange={onChange}
           />
-        </div>
-        <button className='btn btn-primary'>Sent</button>
-      </form>
+        </Form.Group>
+        <Button variant='primary' type='submit'>Sent</Button>
+      </Form>
     </>
   );
 };

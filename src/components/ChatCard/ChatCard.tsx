@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Col } from 'react-bootstrap';
 
 interface Props {
   author: string;
@@ -13,15 +14,15 @@ const ChatCard: React.FC<Props> = ({ author, message, datetime }) => {
   }.${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`;
 
   return (
-    <div className='col-6'>
-      <div className='card mb-3'>
-        <div className='card-header'>Sent at: {dateNow}</div>
-        <div className='card-body'>
-          <h5 className='card-title'>Author: {author}</h5>
-          <p className='card-text'>{message}</p>
-        </div>
-      </div>
-    </div>
+    <Col>
+      <Card style={{ marginBlock: '10px' }}>
+        <Card.Header>Sent at: {dateNow}</Card.Header>
+        <Card.Body>
+          <Card.Title>Author: {author}</Card.Title>
+          <Card.Text>{message}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 

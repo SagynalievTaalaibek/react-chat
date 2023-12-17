@@ -3,6 +3,7 @@ import axiosApi from '../../axiosApi';
 import ChatCard from '../../components/ChatCard/ChatCard';
 import Spinner from '../../components/Spinner/Spinner';
 import FormChat from '../../components/FormChat/FormChat';
+import { Col, Container, Row } from 'react-bootstrap';
 import { ChatApi, ChatForm } from '../../types';
 
 const Chat = () => {
@@ -14,14 +15,14 @@ const Chat = () => {
       const response = await axiosApi.get<ChatApi[]>('/messages');
       setChats(response.data);
     } catch (error) {
-      console.log('Fetch chats error ', error);
+      alert('Fetch chats error ' + error);
     }
   }, []);
 
   useEffect(() => {
     void fetchChats();
 
-    const chatInterval = setInterval(fetchChats, 3000);
+    const chatInterval = setInterval(fetchChats, 5000);
 
     return () => clearInterval(chatInterval);
   }, [fetchChats]);
@@ -45,13 +46,13 @@ const Chat = () => {
 
 
   return (
-    <div className='container mt-5'>
-      <div className='row'>
-        <div className='col-4'>
+    <Container>
+      <Row>
+        <Col xs={4}>
           <FormChat onSubmit={(event) => onSubmit(event)} />
-        </div>
-        <div className='col-8'>
-          <div className='row row-cols-2'>
+        </Col>
+        <Col xs={8}>
+          <Row xs={1} md={2}>
             {loading ? <Spinner /> : chats.map((chat) => (
               <ChatCard
                 key={chat._id}
@@ -60,10 +61,10 @@ const Chat = () => {
                 datetime={chat.datetime}
               />
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
